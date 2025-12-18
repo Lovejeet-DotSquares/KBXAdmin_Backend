@@ -1,0 +1,4 @@
+D:\Project\KBXAdmin\KBXAdmin.Infratruture\obj\Debug\net8.0\KBXAdmin.Infrastruture.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\KBXAdmin\KBXAdmin.Infratruture\obj\Debug\net8.0\KBXAdmin.Infrastruture.AssemblyInfoInputs.cache
+D:\Project\KBXAdmin\KBXAdmin.Infratruture\obj\Debug\net8.0\KBXAdmin.Infrastruture.AssemblyInfo.cs
+D:\Project\KBXAdmin\KBXAdmin.Infratruture\obj\Debug\net8.0\KBXAdmin.Infrastruture.csproj.CoreCompileInputs.cache
