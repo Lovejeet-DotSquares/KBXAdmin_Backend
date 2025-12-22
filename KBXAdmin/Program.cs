@@ -37,11 +37,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-        policy
-      .WithOrigins("https://localhost:3000") // or frontend port
+        policy.AllowAnyOrigin()
+        // or frontend port
       .AllowAnyHeader()
-      .AllowAnyMethod()
-      .AllowCredentials();
+      .AllowAnyMethod();
 
     });
 });
