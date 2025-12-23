@@ -22,6 +22,102 @@ namespace KBXAdmin.Infrastruture.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("KBXAdmin.Domain.Entities.Admin.FormAuditLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("FormId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Metadata")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("PerformedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PerformedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormId");
+
+                    b.ToTable("FormAuditLogs");
+                });
+
+            modelBuilder.Entity("KBXAdmin.Domain.Entities.Admin.FormEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("LockedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LockedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SchemaJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Forms");
+                });
+
+            modelBuilder.Entity("KBXAdmin.Domain.Entities.Admin.FormVersion", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("FormId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("SchemaJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormId");
+
+                    b.ToTable("FormVersions");
+                });
+
             modelBuilder.Entity("KBXAdmin.Domain.Entities.LoginAuditLog", b =>
                 {
                     b.Property<long>("Id")
@@ -106,6 +202,28 @@ namespace KBXAdmin.Infrastruture.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("KBXAdmin.Domain.Entities.Admin.FormAuditLog", b =>
+                {
+                    b.HasOne("KBXAdmin.Domain.Entities.Admin.FormEntity", "Form")
+                        .WithMany()
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Form");
+                });
+
+            modelBuilder.Entity("KBXAdmin.Domain.Entities.Admin.FormVersion", b =>
+                {
+                    b.HasOne("KBXAdmin.Domain.Entities.Admin.FormEntity", "Form")
+                        .WithMany("Versions")
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Form");
+                });
+
             modelBuilder.Entity("KBXAdmin.Domain.Entities.LoginAuditLog", b =>
                 {
                     b.HasOne("User", null)
@@ -118,6 +236,11 @@ namespace KBXAdmin.Infrastruture.Migrations
                         .HasForeignKey("UserId1");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("KBXAdmin.Domain.Entities.Admin.FormEntity", b =>
+                {
+                    b.Navigation("Versions");
                 });
 #pragma warning restore 612, 618
         }

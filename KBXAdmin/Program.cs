@@ -1,5 +1,7 @@
 ﻿using KBXAdmin.Application.Interfaces;
+using KBXAdmin.Application.Interfaces.Admin;
 using KBXAdmin.Application.Services;
+using KBXAdmin.Application.Services.Admin;
 using KBXAdmin.Common.Security;
 using KBXAdmin.Infrastructure.Persistence;
 using KBXAdmin.Infrastructure.Repositories.Implementations;
@@ -8,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +27,9 @@ builder.Services.AddScoped<ILoginAuditLogRepository, LoginAuditLogRepository>();
 // ---------------------- SERVICES ----------------------
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IFormService, FormService>();
+builder.Services.AddScoped<IAuditLogService, AuditLogService>();
+
 
 // ---------------------- HELPERS ----------------------
 builder.Services.AddScoped<JwtTokenGenerator>();
@@ -63,7 +69,9 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = config["Jwt:Issuer"],
         ValidAudience = config["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(key)
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        RoleClaimType = ClaimTypes.Role
+
     };
 });
 

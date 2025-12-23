@@ -7,11 +7,29 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KBXAdmin.Infrastruture.Migrations
 {
     /// <inheritdoc />
-    public partial class initialcreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Forms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    SchemaJson = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: false),
+                    LockedBy = table.Column<string>(type: "text", nullable: true),
+                    LockedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Forms", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -28,6 +46,50 @@ namespace KBXAdmin.Infrastruture.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormAuditLogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FormId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Action = table.Column<string>(type: "text", nullable: false),
+                    PerformedBy = table.Column<string>(type: "text", nullable: false),
+                    Role = table.Column<string>(type: "text", nullable: false),
+                    PerformedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Metadata = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormAuditLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FormAuditLogs_Forms_FormId",
+                        column: x => x.FormId,
+                        principalTable: "Forms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormVersions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FormId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SchemaJson = table.Column<string>(type: "text", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormVersions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FormVersions_Forms_FormId",
+                        column: x => x.FormId,
+                        principalTable: "Forms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,6 +125,16 @@ namespace KBXAdmin.Infrastruture.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_FormAuditLogs_FormId",
+                table: "FormAuditLogs",
+                column: "FormId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FormVersions_FormId",
+                table: "FormVersions",
+                column: "FormId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LoginAuditLogs_UserId",
                 table: "LoginAuditLogs",
                 column: "UserId");
@@ -83,7 +155,16 @@ namespace KBXAdmin.Infrastruture.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "FormAuditLogs");
+
+            migrationBuilder.DropTable(
+                name: "FormVersions");
+
+            migrationBuilder.DropTable(
                 name: "LoginAuditLogs");
+
+            migrationBuilder.DropTable(
+                name: "Forms");
 
             migrationBuilder.DropTable(
                 name: "Users");
