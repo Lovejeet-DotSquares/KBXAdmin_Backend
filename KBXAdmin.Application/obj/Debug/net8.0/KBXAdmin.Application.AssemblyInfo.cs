@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KBXAdmin.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36ef1740c48a1e7c9d5f1b7b33e1fc9f92aef706")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6579005c80766bf5ac448a7a818760c8d5effe36")]
 [assembly: System.Reflection.AssemblyProductAttribute("KBXAdmin.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KBXAdmin.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -2,6 +2,7 @@
 using KBXAdmin.Domain.Entities.Admin;
 using KBXAdmin.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 
 namespace KBXAdmin.Application.Services.Admin
@@ -62,7 +63,7 @@ namespace KBXAdmin.Application.Services.Admin
                 form.Id,
                 "CREATE",
                 userId,
-                "User",
+                "Admin",
                 $"Title: {title}"
             );
 
@@ -92,7 +93,7 @@ namespace KBXAdmin.Application.Services.Admin
                 id,
                 "SAVE_DRAFT",
                 userId,
-                "User"
+              "Admin"
             );
         }
 
@@ -109,7 +110,7 @@ namespace KBXAdmin.Application.Services.Admin
                 id,
                 "AUTOSAVE",
                 userId,
-                "User"
+                "Admin"
             );
         }
 

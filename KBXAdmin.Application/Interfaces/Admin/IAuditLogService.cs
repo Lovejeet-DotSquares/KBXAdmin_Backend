@@ -15,5 +15,5 @@ namespace KBXAdmin.Application.Interfaces.Admin
             string role,
             string? metadata = null
         );
-    }
+    }   
 }
