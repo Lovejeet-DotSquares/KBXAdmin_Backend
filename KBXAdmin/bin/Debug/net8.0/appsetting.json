@@ -11,8 +11,8 @@
     "Key": "MIICXAIBAAKBgQC2f2xH+zylz+mJSbUBSMTjEWh6ZHCAtpZhRepFC7nX3IJ/Wb1nOTw04qVREaWnGsj6Ng6Cem+AbGOtOF7Ws15e5vqV28U2I8Pu0P2hM6j2p1XXJztNGdQyzTuQxh9V7YS5PghuSgBejYgb+xDYrFF4BAxfbp38B2xMRMVeDcxU5wIDAQABAoGAPMLYDm87lglPPAJqXW8Y/nEBVB60xmYEU4avpSVuTsyANl5ujTulLAZ5/C/f828bkxMEabTSAvQTi8zE5r75oBbU8hLDAlIcJBYlNj9uD53AT0cuqS4S2WV081jn2j/NKn7kf02cppMyVHdWmlcoRhOSLgrohOrewXX+dlQzdwECQQDr1KQt//bWv6azjAT+gMbStkNMviWC34OwHAM2iELxprppkoHWKyGH5/gxxPte3DgwcJCHkObyQnHanpk/xBRHAkEAxhsXvfLNk+XwhJRVVjERVCGnYc+C8+Aung7KLAPp1LAeUaIa+1GZYYCzdvI1pmfQIuqVcrrdMmeDuirBBOsqYQJAPYtFuVd2RH7Jc0vUNdLHkE/OamWpBmlsRXZaBE41Ijk/prN8PLcOzhfkdqCQdSYFZ+bIYQiYrJpYehQvrCtwmwJAdFwpf9qDwaFHurfdv/imMwJpbFwUkOZWu2P4gA30ZIbl6BENRBzTuJ99yhnORWWorTmYeoEjt51xlAHUyezPQQJBAJiKiiKU/BphUSdswmdNuekAkL6DNbQX/Zr5VzTnPn01qJ9X1D3W23jMMKss5mYF4PFTnhqQTkwBYwcxxXE5C44="
   },
   "ConnectionStrings": {
-    //"DefaultConnection": "Server=192.168.8.141;Port=5433;Database=KBX;User Id=postgres;Password=Dots@123"
-    "DefaultConnection": "Server=kbx.postgres.database.azure.com;Port=5432;Database=postgres;User Id=kbx;Password=Dots@123"
+    "DefaultConnection": "Server=192.168.8.141;Port=5433;Database=KBX;User Id=postgres;Password=Dots@123"
+    // "DefaultConnection": "Server=kbx.postgres.database.azure.com;Port=5432;Database=postgres;User Id=kbx;Password=Dots@123"
   },
   "AllowedHosts": "*"
 }
