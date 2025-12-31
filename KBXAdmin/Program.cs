@@ -110,7 +110,11 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 // ---------------------- SWAGGER ----------------------
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "KBXAdmin API v1");
+    c.RoutePrefix = "swagger";
+});
 // Routing
 app.UseRouting();
 //----------------------- CORS ---------------------------
