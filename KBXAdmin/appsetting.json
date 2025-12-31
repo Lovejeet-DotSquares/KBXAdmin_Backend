@@ -12,6 +12,7 @@
   },
   "ConnectionStrings": {
     "DefaultConnection": "Server=192.168.8.141;Port=5433;Database=KBX;User Id=postgres;Password=Dots@123"
+    // "DefaultConnection": "Server=kbx.postgres.database.azure.com;Port=5432;Database=postgres;User Id=kbx;Password=Dots@123"
   },
   "AllowedHosts": "*"
 }
